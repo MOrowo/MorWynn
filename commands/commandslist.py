@@ -1,4 +1,4 @@
 CommandLists = [
     '!help',
-    '!nerfuroo'
+    '!n'
 ]
