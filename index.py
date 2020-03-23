@@ -28,8 +28,10 @@ def getNumber():
 def checkClaim(name):
     x = getSubAPI(name)
     if checkISNerfuria(x)==True:
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+        return "🟢"
+    else: return "🔴"
+
+#############NIA####################################################
 
 def claimMaro():
     return checkClaim("Maro Peaks")
@@ -82,8 +84,107 @@ def claimBear():
 def claimRooster():
     return checkClaim("Rooster Island")
 
-def claimTree():
-    return checkClaim("Tree Island")
+################################################################################
+
+####################################FFA#########################################
+
+def claimDetlas():
+    return checkClaim("Detlas")
+
+def claimBob():
+    return checkClaim("Bob's Tomb")
+
+def claimBattle():
+    return checkClaim("Battle Tower")
+
+def claimHerb():
+    return checkClaim("Herb Cave")
+
+def claimJungle():
+    return checkClaim("Jungle Lake")
+
+def claimTemple():
+    return checkClaim("Temple of Legends")
+
+def claimCinfras():
+    return checkClaim("Cinfras")
+
+def claimHive():
+    return checkClaim("Hive")
+
+def claimQira():
+    return checkClaim("Qira's Battle Room")
+
+def claimThesead():
+    return checkClaim("Thesead")
+
+def claimLavaLake():
+    return checkClaim("Lava Lake")
+
+def claimLavaLakeB():
+    return checkClaim("Lava Lake Bridge")
+
+def claimMolten():
+    return checkClaim("Molten Reach")
+
+def claimRBU():
+    return checkClaim("Raider's Base Upper")
+
+def claimRBL():
+    return checkClaim("Raider's Base Lower")
+################################################################################
+
+#################################SE############################################
+
+def claimSilentRoad():
+    return checkClaim("The Silent Road")
+
+def claimBrokenRoad():
+    return checkClaim("The Broken Road")
+
+def claimWormTunnel():
+    return checkClaim("Worm Tunnel")
+
+def claimGray():
+    return checkClaim("Gray Zone")
+
+def claimForgotten():
+    return checkClaim("Forgotten Town")
+
+def claimForest():
+    return checkClaim("Forest of Eyes")
+
+def claimSinister():
+    return checkClaim("Sinister Forest")
+
+def claimLutho():
+    return checkClaim("Lutho")
+
+def claimSludge():
+    return checkClaim("Paths of Sludge")
+
+def claimToxicD():
+    return checkClaim("Toxic Drip")
+
+def claimToxicC():
+    return checkClaim("Toxic Caves")
+
+def claimVoid():
+    return checkClaim("Void Valley")
+
+def claimGate():
+    return checkClaim("Gateway to Nothing")
+
+def claimSacrifice():
+    return checkClaim("Sacrifice")
+
+def claimBizarre():
+    return checkClaim("Bizarre Passage")
+
+def claimTheGate():
+    return checkClaim("The Gate")
+
+##############################################################################
 
 client = discord.Client()
 
@@ -107,19 +208,36 @@ async def on_message(message):
     cmd=cuts(command,message.content)
     if cmd.command=='!help':
         embed = discord.Embed(title="Help commands for bot", description="Lists of commands", color=14803455)
-        embed.add_field(name= "Command Lists", value= "!n -> Shows Nerfuria's Territories")
+        embed.add_field(name= "Command Lists", value= "!n -> Shows Nerfuria's Territories\n!ffa -> Shows FFA Territories\n!se -> Shows Silent Expanse Territories")
         await message.channel.send(embed=embed)
     if cmd.command == '!n':
-        await message.channel.send("Fethcing API wait....")
-        teriEmbed = discord.Embed(title="Lists of Teritories", description="Show teritories that claimed or not", color=14803455)
-        teriEmbed.set_footer(text= f"Nerfuria has territories total of {getNumber()}")
-        teriEmbed.add_field(name="**Territories**", value="Maro peaks is " + claimMaro() + "\nSelchar is " + claimSelchar()
-        + "\nDead Island North West is " + claimdeadNW() + "\nDead Island North East is " + claimdeadNE() + "\nDead Island South West is " + claimdeadSW()
-        + "\nDead Island South East is " + claimdeadSE() + "\nRegular Island is " + claimRegular() + "\nSkeins Island is " + claimSkeins()
-        + "\nNodguj Nation is " + claimNodguj() + "\nDujgon Nation is " + claimDujgon() + "\nIcy Island is " + claimIcy()
-        + "\nSanta's Hideout is " + claimSanta() + "\nMage Island is " + claimMage() + "\nPirate Town is " + claimPirate()
-        + "\nZhight Island is " + claimZhight() + "\nThe Bear Zoo is " + claimBear() + "\nRooster Island is " + claimRooster()
-        + "\nTree Island is " + claimTree())
-        await message.channel.send(embed=teriEmbed)
+        await message.channel.send("Fetching API wait....")
+        niaEmbed = discord.Embed(title="Lists of NIA Teritories", description="Show teritories that claimed or not", color=14803455)
+        niaEmbed.set_footer(text= f"Nerfuria has territories total of {getNumber()}")
+        niaEmbed.add_field(name="**NIA Territories**", value=claimMaro() + " Maro peaks\n" + claimSelchar() + " Selchar\n"
+        + claimdeadNW() + " Dead Island North West\n" + claimdeadNE() + " Dead Island North East\n"+ claimdeadSW() + " Dead Island South West\n"
+        + claimdeadSE() + " Dead Island South East\n" + claimRegular() + " Regular Island\n" + claimSkeins() + " Skiens Island\n"
+        + claimNodguj() + " Nodguj Nation\n" + claimDujgon() + " Dujgon Nation\n" + claimIcy() + " Icy Island\n"
+        + claimSanta() + " Santa's Hideout\n" + claimMage() + " Mage Island\n" + claimPirate() + " Pirate Town\n"
+        + claimZhight() + " Zhight Island\n" + claimBear() + " The Bear Zoo\n" + claimRooster() + " Rooster Island\n")
+        await message.channel.send(embed=niaEmbed)
+    if cmd.command == "!ffa":
+        await message.channel.send("Fetching API wait...")
+        ffaEmbed = discord.Embed(title="Lists of FFA Territories", description="Show FFA Territories", color=3447003)
+        ffaEmbed.add_field(name="**Wynn Province**", value=claimDetlas() + " Detlas\n" + claimBob() + " Bob's Tomb\n" + claimBattle() + " Battle Tower\n"
+        + claimHerb() + " Herb Cave\n" + claimJungle() + " Jungle Lake\n" + claimTemple() + " Temple of Legends")
+        ffaEmbed.add_field(name="**Gravel Province**", value=claimCinfras() + " Cinfras\n" + claimHive() + " Hive\n"
+        + claimQira() + " Qira's Battle Room\n" + claimThesead() + " Thesead\n" + claimLavaLake() + " Lava Lake\n" + claimLavaLakeB() + " Lava Lake Bridge\n"
+        + claimMolten() + " Molten Reach\n" + claimRBL() + " Raider's Base Lower\n" + claimRBU() + " Raider's Base Upper")
+        await message.channel.send(embed=ffaEmbed)
+    if cmd.command == "!se":
+        await message.channel.send("Fetching API wait...")
+        seEmbed = discord.Embed(title="List of SE Territories", description="Show SE Territories", color=16776960)
+        seEmbed.add_field(name="**Silent Expanse**", value=claimSilentRoad() + " The Silent Road\n" + claimBrokenRoad() + " The Broken Road\n"
+        + claimWormTunnel() + " Worm Tunnel\n" + claimGray() + " Gray Zone\n" + claimForgotten() + " Forgotten Town\n" + claimForest() + " Forest of Eyes\n"
+        + claimSinister() + " Sinister Forest\n" + claimLutho() + " Lutho\n" + claimSludge() + " Paths of sludge\n" + claimToxicD() + " Toxic Drip\n"
+        + claimToxicC() + " Toxic Cave\n" + claimVoid() + " Void Valley\n" + claimGate() + " Gateway to Nothing\n" + claimSacrifice() + " Sacrifice\n"
+        + claimBizarre() + "Bizzare Passage\n" + claimTheGate() + " The Gate")
+        await message.channel.send(embed=seEmbed)
 
 client.run(TOKEN)
