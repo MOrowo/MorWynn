@@ -1,339 +1,89 @@
 import discord
 import requests
-import datetime
+from datetime import datetime
 
 from config import TOKEN
 from commands.commandslist import CommandLists as command
 
-def maropeaks():
+def getDataFromWynncraft():
     e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
     f = e.json()
-    return f["territories"]["Maro Peaks"]["guild"]
+    return f
 
-def checkmaro():
-    x = maropeaks()
-    if x == "Nerfuria":
-        return "true"
+def getSubAPI(mode):
+    f = getDataFromWynncraft()
+    return f["territories"][str(mode)]["guild"]
+
+def checkISNerfuria(data):
+    if data == "Nerfuria":
+        return True
     else:
-        return "false"
-
-def selchar():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Selchar"]["guild"]
-
-def checkselchar():
-    x = selchar()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def deadNW():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Dead Island North West"]["guild"]
-
-def checkdeadNW():
-    x = deadNW()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def deadNE():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Dead Island North East"]["guild"]
-
-def checkdeadNE():
-    x = deadNE()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def deadSE():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Dead Island South East"]["guild"]
-
-def checkdeadSE():
-    x = deadSE()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def deadSW():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Dead Island South West"]["guild"]
-
-def checkdeadSW():
-    x = deadSW()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def regular():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Regular Island"]["guild"]
-
-def checkregular():
-    x = regular()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def skiens():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Skiens Island"]["guild"]
-
-def checkskiens():
-    x = skiens()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def nodguj():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Nodguj Nation"]["guild"]
-
-def checknodguj():
-    x = nodguj()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def dujgon():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Dujgon Nation"]["guild"]
-
-def checkdujgon():
-    x = dujgon()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def icy():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Icy Island"]["guild"]
-
-def checkicy():
-    x = icy()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def santa():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Santa's Hideout"]["guild"]
-
-def checksanta():
-    x = santa()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def mage():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Mage Island"]["guild"]
-
-def checkmage():
-    x = mage()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def pirate():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Pirate Town"]["guild"]
-
-def checkpirate():
-    x = pirate()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def zhight():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Zhight Island"]["guild"]
-
-def checkzeight():
-    x = zhight()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def bear():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["The Bear Zoo"]["guild"]
-
-def checkbear():
-    x = bear()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def rooster():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Rooster Island"]["guild"]
-
-def checkrooster():
-    x = rooster()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
-
-def tree():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f["territories"]["Tree Island"]["guild"]
-
-def checktree():
-    x = tree()
-    if x == "Nerfuria":
-        return "true"
-    else:
-        return "false"
+        return False
 
 def getNumber():
     a = requests.get("https://api.wynncraft.com/public_api.php?action=guildStats&command=Nerfuria")
     b = a.json()
     return(b["territories"])
 
-maro = checkmaro()
-selchar = checkselchar()
-deadNW = checkdeadNW()
-deadNE = checkdeadNE()
-deadSE = checkdeadSE()
-deadSW = checkdeadSW()
-regular = checkregular()
-skiens = checkskiens()
-nodguj = checknodguj()
-dujgon = checkdujgon()
-icy = checkicy()
-santa = checksanta()
-mage = checkmage()
-pirate = checkpirate()
-zhight = checkzeight()
-bear = checkbear()
-rooster = checkrooster()
-tree = checktree()
+def checkClaim(name):
+    x = getSubAPI(name)
+    if checkISNerfuria(x)==True:
+        return "claimed 🟢"
+    else: return "not claimed 🔴"
 
 def claimMaro():
-    if maro == "true":
-            return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Maro Peaks")
 
 def claimSelchar():
-    if selchar == "true":
-            return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Selchar")
 
 def claimdeadNW():
-    if deadNW == "true":
-            return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Dead Island North West")
 
 def claimdeadNE():
-    if deadNE == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Dead Island North East")
 
 def claimdeadSE():
-    if deadSE == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Dead Island South East")
 
 def claimdeadSW():
-    if deadSW == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Dead Island South West")
 
 def claimRegular():
-    if regular == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Regular Island")
 
 def claimSkeins():
-    if skiens == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Skiens Island")
 
 def claimNodguj():
-    if nodguj == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Nodguj Nation")
 
 def claimDujgon():
-    if dujgon == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Dujgon Nation")
 
 def claimIcy():
-    if icy == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Icy Island")
 
 def claimSanta():
-    if santa == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Santa's Hideout")
 
 def claimMage():
-    if mage == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Mage Island")
 
 def claimPirate():
-    if pirate == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Pirate Town")
 
 def claimZhight():
-    if zhight == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Zhight Island")
 
 def claimBear():
-    if bear == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("The Bear Zoo")
 
 def claimRooster():
-    if rooster == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Rooster Island")
 
 def claimTree():
-    if tree == "true":
-        return "claimed 🟢"
-    else: return "not claimed 🔴"
+    return checkClaim("Tree Island")
 
 client = discord.Client()
 
@@ -357,11 +107,12 @@ async def on_message(message):
     cmd=cuts(command,message.content)
     if cmd.command=='!help':
         embed = discord.Embed(title="Help commands for bot", description="Lists of commands", color=14803455)
+        embed.add_field(name= "Command Lists", value= "!n -> Shows Nerfuria's Territories")
         await message.channel.send(embed=embed)
     if cmd.command == '!n':
+        await message.channel.send("Fethcing API wait....")
         teriEmbed = discord.Embed(title="Lists of Teritories", description="Show teritories that claimed or not", color=14803455)
         teriEmbed.set_footer(text= f"Nerfuria has territories total of {getNumber()}")
-        teriEmbed.timestamp(datetime.datetime)
         teriEmbed.add_field(name="**Territories**", value="Maro peaks is " + claimMaro() + "\nSelchar is " + claimSelchar()
         + "\nDead Island North West is " + claimdeadNW() + "\nDead Island North East is " + claimdeadNE() + "\nDead Island South West is " + claimdeadSW()
         + "\nDead Island South East is " + claimdeadSE() + "\nRegular Island is " + claimRegular() + "\nSkeins Island is " + claimSkeins()
