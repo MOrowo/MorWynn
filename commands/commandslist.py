@@ -3,4 +3,5 @@ CommandLists = [
     '!n'
     '!ffa'
     '!se'
+    '!loot'
 ]

@@ -1,9 +1,27 @@
 import discord
 import requests
 from datetime import datetime
+from random import randint
 
-from config import TOKEN
 from commands.commandslist import CommandLists as command
+from config import TOKEN
+
+def randomgame():
+    a = randint(1, 10000)
+    if a <= 4000:
+        return "You got Emeralds in loot chest(40%)"
+    elif a <= 6500:
+        return "You got Emeralds with Common items(25%)"
+    elif a <= 8000:
+        return "You got Emeralds with Unique items(15%)"
+    elif a <= 9000:
+        return "You got Emeralds with Rare items(10%)"
+    elif a <= 9800:
+        return "You got Emeralds with Legendary items(8%)"
+    elif a <= 9990:
+        return "You got Emeralds with Fabled items(1.9%)"
+    else: return "Mythic Boom!!!!"
+
 
 def getDataFromWynncraft():
     e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
@@ -208,7 +226,7 @@ async def on_message(message):
     cmd=cuts(command,message.content)
     if cmd.command=='!help':
         embed = discord.Embed(title="Help commands for bot", description="Lists of commands", color=14803455)
-        embed.add_field(name= "Command Lists", value= "!n -> Shows Nerfuria's Territories\n!ffa -> Shows FFA Territories\n!se -> Shows Silent Expanse Territories")
+        embed.add_field(name= "Command Lists", value= "!n -> Shows Nerfuria's Territories\n!ffa -> Shows FFA Territories\n!se -> Shows Silent Expanse Territories\n!loot -> loot game")
         await message.channel.send(embed=embed)
     if cmd.command == '!n':
         await message.channel.send("Fetching API wait....")
@@ -226,7 +244,7 @@ async def on_message(message):
         ffaEmbed = discord.Embed(title="Lists of FFA Territories", description="Show FFA Territories", color=3447003)
         ffaEmbed.add_field(name="**Wynn Province**", value=claimDetlas() + " Detlas\n" + claimBob() + " Bob's Tomb\n" + claimBattle() + " Battle Tower\n"
         + claimHerb() + " Herb Cave\n" + claimJungle() + " Jungle Lake\n" + claimTemple() + " Temple of Legends")
-        ffaEmbed.add_field(name="**Gravel Province**", value=claimCinfras() + " Cinfras\n" + claimHive() + " Hive\n"
+        ffaEmbed.add_field(name="**Gavel Province**", value=claimCinfras() + " Cinfras\n" + claimHive() + " Hive\n"
         + claimQira() + " Qira's Battle Room\n" + claimThesead() + " Thesead\n" + claimLavaLake() + " Lava Lake\n" + claimLavaLakeB() + " Lava Lake Bridge\n"
         + claimMolten() + " Molten Reach\n" + claimRBL() + " Raider's Base Lower\n" + claimRBU() + " Raider's Base Upper")
         await message.channel.send(embed=ffaEmbed)
@@ -239,5 +257,7 @@ async def on_message(message):
         + claimToxicC() + " Toxic Cave\n" + claimVoid() + " Void Valley\n" + claimGate() + " Gateway to Nothing\n" + claimSacrifice() + " Sacrifice\n"
         + claimBizarre() + "Bizzare Passage\n" + claimTheGate() + " The Gate")
         await message.channel.send(embed=seEmbed)
+    if cmd.command == "!loot":
+        await message.channel.send(randomgame())
 
 client.run(TOKEN)
