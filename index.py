@@ -1,11 +1,24 @@
 import discord
-import requests
-from datetime import datetime
+import datetime
+import asyncio
+import urllib
+import json
 from random import randint
 
 from commands.commandslist import CommandLists as command
 from config import TOKEN
 
+def get_data(url):
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as fp:
+            mybytes = fp.read()
+            mystr = mybytes.decode("utf-8")
+            fp.close()
+            mystr=json.loads(mystr) 
+            return mystr
+    except:
+        return get_data(url)
 def randomgame():
     a = randint(1, 10000)
     if a <= 4000:
@@ -24,9 +37,8 @@ def randomgame():
 
 
 def getDataFromWynncraft():
-    e = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList")
-    f = e.json()
-    return f
+    e = get_data("https://api.wynncraft.com/public_api.php?action=territoryList")
+    return e
 
 def getSubAPI(mode):
     f = getDataFromWynncraft()
@@ -39,10 +51,8 @@ def checkISNerfuria(data):
         return False
 
 def getNumber():
-    a = requests.get("https://api.wynncraft.com/public_api.php?action=guildStats&command=Nerfuria")
-    b = a.json()
-    return(b["territories"])
-
+    a = get_data("https://api.wynncraft.com/public_api.php?action=guildStats&command=Nerfuria")
+    return(a["territories"])
 def checkClaim(name):
     x = getSubAPI(name)
     if checkISNerfuria(x)==True:
@@ -203,7 +213,7 @@ def claimTheGate():
     return checkClaim("The Gate")
 
 ##############################################################################
-
+##############################################################################
 client = discord.Client()
 
 class cuts():
@@ -223,6 +233,15 @@ async def on_ready():
     print('Bot is Ready')
 @client.event
 async def on_message(message):
+    async def TeriMessage():
+        y = getNumber()
+        sendChannel = client.get_channel(696636247015161906)
+        if int(y) >= 17:
+            while not client.is_closed:
+                await sendChannel.send("✅ We have all own claims")
+                await asyncio.sleep(30)
+        else: await sendChannel.send("❌ We don't have all own claims")
+    client.loop.create_task(TeriMessage())
     cmd=cuts(command,message.content)
     if cmd.command=='!help':
         embed = discord.Embed(title="Help commands for bot", description="Lists of commands", color=14803455)
@@ -259,5 +278,4 @@ async def on_message(message):
         await message.channel.send(embed=seEmbed)
     if cmd.command == "!loot":
         await message.channel.send(randomgame())
-
 client.run(TOKEN)
