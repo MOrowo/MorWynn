@@ -3,8 +3,9 @@ import datetime
 import asyncio
 import urllib
 import json
+import threading
+from discord.ext import tasks
 from random import randint
-
 from commands.commandslist import CommandLists as command
 from config import TOKEN
 
@@ -111,6 +112,9 @@ def claimBear():
 
 def claimRooster():
     return checkClaim("Rooster Island")
+
+def claimHalfMoon():
+    return checkClaim("Half Moon Island")
 
 ################################################################################
 
@@ -228,20 +232,21 @@ class cuts():
         if self.value=='':
             self.value='No Command'
 
-@client.event
+async def TeriMessage():
+    y = getNumber()
+    sendChannel = client.get_channel(696636247015161906)
+    if int(y) >= 18:
+        while not client.is_closed:
+            await sendChannel.send(":white_check_mark: We have all own claims")
+            await asyncio.sleep(5) #set sleep time in second
+    else: await sendChannel.send(":x: We don't have all own claims")
+
 async def on_ready():
     print('Bot is Ready')
+client.loop.create_task(TeriMessage())
+
 @client.event
 async def on_message(message):
-    async def TeriMessage():
-        y = getNumber()
-        sendChannel = client.get_channel(696636247015161906)
-        if int(y) >= 17:
-            while not client.is_closed:
-                await sendChannel.send("✅ We have all own claims")
-                await asyncio.sleep(30)
-        else: await sendChannel.send("❌ We don't have all own claims")
-    client.loop.create_task(TeriMessage())
     cmd=cuts(command,message.content)
     if cmd.command=='!help':
         embed = discord.Embed(title="Help commands for bot", description="Lists of commands", color=14803455)
@@ -256,7 +261,7 @@ async def on_message(message):
         + claimdeadSE() + " Dead Island South East\n" + claimRegular() + " Regular Island\n" + claimSkeins() + " Skiens Island\n"
         + claimNodguj() + " Nodguj Nation\n" + claimDujgon() + " Dujgon Nation\n" + claimIcy() + " Icy Island\n"
         + claimSanta() + " Santa's Hideout\n" + claimMage() + " Mage Island\n" + claimPirate() + " Pirate Town\n"
-        + claimZhight() + " Zhight Island\n" + claimBear() + " The Bear Zoo\n" + claimRooster() + " Rooster Island\n")
+        + claimZhight() + " Zhight Island\n" + claimBear() + " The Bear Zoo\n" + claimRooster() + " Rooster Island\n" + claimHalfMoon() + "Half Moon Island")
         await message.channel.send(embed=niaEmbed)
     if cmd.command == "!ffa":
         await message.channel.send("Fetching API wait...")
